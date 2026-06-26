@@ -88,41 +88,5 @@
     "timeMonth": 745,
     "timeYear": 745,
     "dailyMinutesDown": {}
-  },
-  {
-    "name": "Dashboard",
-    "url": "https://app.namoid.in",
-    "icon": "https://icons.duckduckgo.com/ip3/app.namoid.in.ico",
-    "slug": "dashboard",
-    "status": "up",
-    "uptime": "100.00%",
-    "uptimeDay": "100.00%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 695,
-    "timeDay": 695,
-    "timeWeek": 695,
-    "timeMonth": 695,
-    "timeYear": 695,
-    "dailyMinutesDown": {}
-  },
-  {
-    "name": "Docs",
-    "url": "https://docs.namoid.in",
-    "icon": "https://icons.duckduckgo.com/ip3/docs.namoid.in.ico",
-    "slug": "docs",
-    "status": "up",
-    "uptime": "100.00%",
-    "uptimeDay": "100.00%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 696,
-    "timeDay": 696,
-    "timeWeek": 696,
-    "timeMonth": 696,
-    "timeYear": 696,
-    "dailyMinutesDown": {}
   }
 ]

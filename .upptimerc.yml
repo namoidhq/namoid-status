@@ -32,17 +32,19 @@ sites:
       - 200
     __dangerous__body_down_if_text_missing: '"keys"'
 
-  - name: Dashboard
-    url: https://app.namoid.in
-    maxResponseTime: 3000
-    expectedStatusCodes:
-      - 401          # Basic-auth gated pre-GA; 401 proves Caddy + web container are serving
-
-  - name: Docs
-    url: https://docs.namoid.in
-    maxResponseTime: 3000
-    expectedStatusCodes:
-      - 401
+  # --- Hidden from the status page pre-GA (commented out on request) ---
+  # To monitor again: uncomment a block; flip 401 -> 200 when Basic Auth is removed at GA.
+  # - name: Dashboard
+  #   url: https://app.namoid.in
+  #   maxResponseTime: 3000
+  #   expectedStatusCodes:
+  #     - 401          # Basic-auth gated pre-GA; 401 proves Caddy + web container are serving
+  #
+  # - name: Docs
+  #   url: https://docs.namoid.in
+  #   maxResponseTime: 3000
+  #   expectedStatusCodes:
+  #     - 401
 
 status-website:
   cname: status.namoid.in
