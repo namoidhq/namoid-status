@@ -1,0 +1,73 @@
+owner: namoidhq
+repo: namoid-status
+
+sites:
+  - name: Marketing
+    url: https://namoid.in
+    maxResponseTime: 3000
+
+  - name: API Liveness
+    url: https://api.namoid.in/healthz
+    maxResponseTime: 1500
+    expectedStatusCodes:
+      - 200
+
+  - name: API Readiness
+    url: https://api.namoid.in/readyz
+    maxResponseTime: 2000
+    expectedStatusCodes:
+      - 200          # /readyz returns 503 when Postgres or Redis is down — let that page us
+
+  - name: OIDC Discovery
+    url: https://api.namoid.in/.well-known/openid-configuration
+    maxResponseTime: 1500
+    expectedStatusCodes:
+      - 200
+    __dangerous__body_down_if_text_missing: '"issuer"'   # not just 200 — verify it's a real discovery doc
+
+  - name: JWKS
+    url: https://api.namoid.in/jwks.json
+    maxResponseTime: 1500
+    expectedStatusCodes:
+      - 200
+    __dangerous__body_down_if_text_missing: '"keys"'
+
+  - name: Dashboard
+    url: https://app.namoid.in
+    maxResponseTime: 3000
+    expectedStatusCodes:
+      - 401          # Basic-auth gated pre-GA; 401 proves Caddy + web container are serving
+
+  - name: Docs
+    url: https://docs.namoid.in
+    maxResponseTime: 3000
+    expectedStatusCodes:
+      - 401
+
+status-website:
+  cname: status.namoid.in
+  name: NamoID Status
+  introTitle: "NamoID Status"
+  introMessage: "Live uptime and incident status for NamoID — Marketing site, API, and the OIDC identity provider."
+  logoUrl: https://namoid.in/favicon.ico   # ← update to a real logo URL if available
+  theme: light
+  navbar:
+    - title: Home
+      href: /
+    - title: Website
+      href: https://namoid.in
+
+assignees:
+  - harshita3199     # real GitHub username (not the org); assignees get emailed on every incident
+
+# Built-in notifications. Email is delivered via GitHub Issue assignment above.
+# Add a Slack/Telegram channel here for push alerts (see Task 5).
+# notifications:
+#   - type: slack
+#     channel: "#alerts"
+
+commitMessages:
+  statusChange: "$PREFIX $SITE_NAME is $STATUS ($RESPONSE_CODE in $RESPONSE_TIME ms) [skip ci] [upptime]"
+
+i18n:
+  footer: "© 2026 NamoID. All rights reserved."
