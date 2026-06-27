@@ -29,9 +29,6 @@ jobs:
   release:
     name: Setup Upptime
     runs-on: ubuntu-latest
-    # Only run on the default branch so this never commits generated data to
-    # feature branches (which causes repeated history/README merge conflicts).
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
