@@ -34,13 +34,13 @@ NamoID's public status page — live uptime, response time, and incident history
 
 The real public surfaces:
 
-| Service | Endpoint | Expected |
-| --- | --- | --- |
-| Marketing | `https://namoid.in` | `200` |
-| API — liveness | `https://api.namoid.in/healthz` | `200` |
-| API — readiness | `https://api.namoid.in/readyz` | `200` (returns `503` when Postgres/Redis is degraded — we *want* that to alert) |
-| OIDC discovery | `https://api.namoid.in/.well-known/openid-configuration` | `200` + `"issuer"` in body |
-| JWKS | `https://api.namoid.in/jwks.json` | `200` + `"keys"` in body |
+| Service         | Endpoint                                                 | Expected                                                                        |
+| --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Marketing       | `https://namoid.in`                                      | `200`                                                                           |
+| API — liveness  | `https://api.namoid.in/healthz`                          | `200`                                                                           |
+| API — readiness | `https://api.namoid.in/readyz`                           | `200` (returns `503` when Postgres/Redis is degraded — we _want_ that to alert) |
+| OIDC discovery  | `https://api.namoid.in/.well-known/openid-configuration` | `200` + `"issuer"` in body                                                      |
+| JWKS            | `https://api.namoid.in/jwks.json`                        | `200` + `"keys"` in body                                                        |
 
 > **Dashboard** (`app.namoid.in`) and **Docs** (`docs.namoid.in`) are commented out in `.upptimerc.yml` while they sit behind the pre-GA HTTP Basic Auth gate. At GA, uncomment them and flip `expectedStatusCodes` from `401` to `200`.
 
@@ -61,8 +61,8 @@ Open a GitHub Issue with the `status` label using the **Incident Report** templa
 
 ## Secrets
 
-| Secret | Purpose |
-| --- | --- |
+| Secret   | Purpose                                                                  |
+| -------- | ------------------------------------------------------------------------ |
 | `GH_PAT` | Token for Actions to commit uptime data and trigger downstream workflows |
 
 Alerting is GitHub-native (issue assignees are emailed) — no Slack webhook or SMTP secret is configured.
