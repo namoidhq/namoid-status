@@ -48,7 +48,7 @@ The real public surfaces:
 
 - GitHub Actions probes each endpoint every ~5 min (best-effort cron — treat ~5–15 min as the real resolution).
 - Response time is tracked automatically (`response-time.yml`).
-- Incidents are logged as GitHub **Issues** (`status` label); assignees are emailed automatically by GitHub.
+- Incidents are logged as GitHub **Issues** (`status` label); assignees are emailed automatically by GitHub. Alerting is GitHub-native email only — no Slack/SMTP.
 - `setup.yml` / `site.yml` are gated to the default branch, so config PRs don't generate merge conflicts in the auto-managed data files.
 
 ## To add or change a service
@@ -64,7 +64,8 @@ Open a GitHub Issue with the `status` label using the **Incident Report** templa
 | Secret | Purpose |
 | --- | --- |
 | `GH_PAT` | Token for Actions to commit uptime data and trigger downstream workflows |
-| `NOTIFICATION_SLACK` | *(optional — not currently configured)* Slack webhook for push alerts |
+
+Alerting is GitHub-native (issue assignees are emailed) — no Slack webhook or SMTP secret is configured.
 
 ## 📄 License
 
