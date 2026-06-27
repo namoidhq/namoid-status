@@ -95,16 +95,18 @@
     "icon": "https://icons.duckduckgo.com/ip3/api.namoid.in.ico",
     "slug": "downtime-test",
     "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "100.00%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 693,
-    "timeDay": 693,
-    "timeWeek": 693,
-    "timeMonth": 693,
-    "timeYear": 693,
-    "dailyMinutesDown": {}
+    "uptime": "99.08%",
+    "uptimeDay": "99.08%",
+    "uptimeWeek": "99.08%",
+    "uptimeMonth": "99.08%",
+    "uptimeYear": "99.08%",
+    "time": 662,
+    "timeDay": 662,
+    "timeWeek": 662,
+    "timeMonth": 662,
+    "timeYear": 662,
+    "dailyMinutesDown": {
+      "2026-06-27": 0
+    }
   }
 ]
