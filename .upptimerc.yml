@@ -32,12 +32,6 @@ sites:
       - 200
     __dangerous__body_down_if_text_missing: '"keys"'
 
-  # TEMPORARY — Task 6 end-to-end downtime test. Remove after verifying the alert pipeline.
-  - name: Downtime Test
-    url: https://api.namoid.in/this-path-does-not-exist-999
-    expectedStatusCodes:
-      - 200
-
   # --- Hidden from the status page pre-GA (commented out on request) ---
   # To monitor again: uncomment a block; flip 401 -> 200 when Basic Auth is removed at GA.
   # - name: Dashboard
