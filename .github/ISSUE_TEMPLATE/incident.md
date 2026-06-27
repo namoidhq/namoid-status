@@ -2,6 +2,7 @@
 name: Incident Report
 about: Document a NamoID service incident
 labels: status
+assignees: 'harshita3199'
 ---
 
 ## Incident Summary
