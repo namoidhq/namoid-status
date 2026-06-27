@@ -51,7 +51,7 @@ status-website:
   name: NamoID Status
   introTitle: "NamoID Status"
   introMessage: "Live uptime and incident status for NamoID — Marketing site, API, and the OIDC identity provider."
-  logoUrl: https://namoid.in/favicon.ico   # ← update to a real logo URL if available
+  logoUrl: https://namoid.in/brand/namoid-mark.svg   # official NamoID brand mark (SVG)
   theme: light
   navbar:
     - title: Home
