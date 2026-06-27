@@ -26,6 +26,46 @@ With [Upptime](https://upptime.js.org), you can get your own unlimited and free 
 
 [**Visit our status website →**](https://status.namoid.in)
 
+## About
+
+NamoID's public status page — live uptime, response time, and incident history for [NamoID](https://namoid.in), the OAuth 2.1 + OIDC identity provider. It runs entirely on GitHub (Actions + Pages) via [Upptime](https://upptime.js.org) and is **independent of the production EC2/Caddy stack**.
+
+## What it monitors
+
+The real public surfaces:
+
+| Service | Endpoint | Expected |
+| --- | --- | --- |
+| Marketing | `https://namoid.in` | `200` |
+| API — liveness | `https://api.namoid.in/healthz` | `200` |
+| API — readiness | `https://api.namoid.in/readyz` | `200` (returns `503` when Postgres/Redis is degraded — we *want* that to alert) |
+| OIDC discovery | `https://api.namoid.in/.well-known/openid-configuration` | `200` + `"issuer"` in body |
+| JWKS | `https://api.namoid.in/jwks.json` | `200` + `"keys"` in body |
+
+> **Dashboard** (`app.namoid.in`) and **Docs** (`docs.namoid.in`) are commented out in `.upptimerc.yml` while they sit behind the pre-GA HTTP Basic Auth gate. At GA, uncomment them and flip `expectedStatusCodes` from `401` to `200`.
+
+## How it works
+
+- GitHub Actions probes each endpoint every ~5 min (best-effort cron — treat ~5–15 min as the real resolution).
+- Response time is tracked automatically (`response-time.yml`).
+- Incidents are logged as GitHub **Issues** (`status` label); assignees are emailed automatically by GitHub.
+- `setup.yml` / `site.yml` are gated to the default branch, so config PRs don't generate merge conflicts in the auto-managed data files.
+
+## To add or change a service
+
+Edit `.upptimerc.yml` under `sites:`. Set `expectedStatusCodes` to match the real response (e.g. `401` for a Basic-auth-gated host) and a `maxResponseTime`. Open a PR — on merge, Setup CI regenerates the page.
+
+## To post a manual incident
+
+Open a GitHub Issue with the `status` label using the **Incident Report** template.
+
+## Secrets
+
+| Secret | Purpose |
+| --- | --- |
+| `GH_PAT` | Token for Actions to commit uptime data and trigger downstream workflows |
+| `NOTIFICATION_SLACK` | *(optional — not currently configured)* Slack webhook for push alerts |
+
 ## 📄 License
 
 - Powered by: [Upptime](https://github.com/upptime/upptime)
