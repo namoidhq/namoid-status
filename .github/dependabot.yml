@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Keep GitHub Actions pinned to commit SHAs up to date. Dependabot opens PRs
+  # that bump the SHA and refresh the trailing "# vX" comment automatically.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 5
