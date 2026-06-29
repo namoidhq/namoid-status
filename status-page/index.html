@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0e5b47" />
+    <meta name="description" content="Live uptime, response times, and incident history for NamoID." />
+    <meta property="og:title" content="NamoID Status" />
+    <meta property="og:description" content="Live uptime, response times, and incident history for NamoID." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://status.namoid.in" />
+    <title>NamoID Status</title>
+    <link rel="icon" href="./assets/namoid-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="https://namoid.in" aria-label="NamoID home">
+        <img src="./assets/namoid-mark.svg" alt="" width="36" height="36" />
+        <span>NamoID</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="https://namoid.in">Website</a>
+        <a href="https://docs.namoid.in">Docs</a>
+        <a href="https://github.com/namoidhq/namoid-status/issues">Incidents</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Public system status</p>
+          <h1 id="page-title">NamoID Status</h1>
+          <p class="hero-text">
+            Live health, response times, and incident history for NamoID's public
+            authentication surfaces.
+          </p>
+        </div>
+        <aside class="status-panel" aria-label="Current status summary">
+          <div class="status-orbit" aria-hidden="true">
+            <span></span>
+          </div>
+          <p class="status-label">Current State</p>
+          <p class="status-headline" id="overallStatus">Checking systems</p>
+          <p class="status-meta" id="lastUpdated">Loading latest monitor data</p>
+        </aside>
+      </section>
+
+      <section class="metrics-grid" aria-label="Status metrics">
+        <article class="metric">
+          <span class="metric-label">Operational</span>
+          <strong id="operationalCount">-</strong>
+          <span id="operationalMeta">services online</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Average Latency</span>
+          <strong id="avgLatency">-</strong>
+          <span>latest response time</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Uptime</span>
+          <strong id="avgUptime">-</strong>
+          <span>30 day average</span>
+        </article>
+      </section>
+
+      <section class="section-shell" aria-labelledby="services-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Monitored endpoints</p>
+            <h2 id="services-title">Service Health</h2>
+          </div>
+          <a class="text-link" href="https://github.com/namoidhq/namoid-status/actions">View monitor runs</a>
+        </div>
+        <div class="service-list" id="serviceList" aria-live="polite">
+          <article class="service-card skeleton"></article>
+          <article class="service-card skeleton"></article>
+          <article class="service-card skeleton"></article>
+        </div>
+      </section>
+
+      <section class="section-shell timeline-shell" aria-labelledby="timeline-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Incident record</p>
+            <h2 id="timeline-title">Recent Activity</h2>
+          </div>
+          <a class="text-link" href="https://github.com/namoidhq/namoid-status/issues?q=is%3Aissue+label%3Astatus">Open incidents</a>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 PolyMindsLabs Pvt. Ltd.</span>
+      <span>Powered by Upptime monitoring data.</span>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
