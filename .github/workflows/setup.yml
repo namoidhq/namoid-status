@@ -58,17 +58,13 @@ jobs:
         with:
           workflow: Graphs CI
           token: ${{ secrets.GH_PAT || github.token }}
-      - name: Generate site
-        uses: upptime/uptime-monitor@5d69af5f0d5b6172fee77bb0daa7a3fc3b62139b # v1.43.5
-        with:
-          command: "site"
-        env:
-          GH_PAT: ${{ secrets.GH_PAT || github.token }}
+      - name: Build custom status page
+        run: node scripts/build-custom-site.mjs
       - uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
         name: GitHub Pages Deploy
         with:
           github_token: ${{ secrets.GH_PAT || github.token }}
-          publish_dir: "site/status-page/__sapper__/export/"
+          publish_dir: "dist"
           force_orphan: "false"
           user_name: "Upptime Bot"
           user_email: "73812536+upptime-bot@users.noreply.github.com"

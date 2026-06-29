@@ -19,6 +19,10 @@ on:
   push:
     paths:
       - "assets/**"
+      - "history/**"
+      - "status-page/**"
+      - "scripts/build-custom-site.mjs"
+      - ".github/workflows/site.yml"
   schedule:
     - cron: "0 1 * * *"
   repository_dispatch:
@@ -33,24 +37,19 @@ jobs:
   release:
     name: Build and deploy site
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           token: ${{ secrets.GH_PAT || github.token }}
-      - name: Generate site
-        uses: upptime/uptime-monitor@5d69af5f0d5b6172fee77bb0daa7a3fc3b62139b # v1.43.5
-        with:
-          command: "site"
-        env:
-          GH_PAT: ${{ secrets.GH_PAT || github.token }}
+      - name: Build custom status page
+        run: node scripts/build-custom-site.mjs
       - uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
         name: GitHub Pages Deploy
         with:
           github_token: ${{ secrets.GH_PAT || github.token }}
-          publish_dir: "site/status-page/__sapper__/export/"
+          publish_dir: "dist"
           force_orphan: "false"
           user_name: "Upptime Bot"
           user_email: "73812536+upptime-bot@users.noreply.github.com"
