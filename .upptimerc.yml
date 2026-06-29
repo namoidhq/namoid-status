@@ -74,7 +74,7 @@ status-website:
   logoUrl: https://namoid.in/brand/namoid-mark.svg       # emerald tile + white N — reads well on dark
   favicon: https://namoid.in/icon-192.png                # PNG favicon (Upptime's `favicon` expects PNG)
   faviconSvg: https://namoid.in/brand/namoid-favicon.svg # crisp SVG favicon for modern browsers
-  theme: dark
+  theme: light
   # Open Graph / Twitter card so the status link previews on-brand when shared in Slack/X
   metaTags:
     - property: "og:title"
@@ -114,20 +114,21 @@ status-website:
       --namoid-mint: #cfe3da;
       --namoid-ink: #0a0a0a;
     }
+    /* Light theme + NamoID brand fonts and emerald accents — no background override,
+       so the clean light look is preserved. */
     body {
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-      background: var(--namoid-ink) !important;
     }
     h1, h2, h3, .lead {
       font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     h1, h2, h3 { letter-spacing: -0.02em; }
-    header h1 { color: var(--namoid-mint); }
-    a { color: var(--namoid-mint); }
-    a:hover { color: #ffffff; }
+    header h1 { color: var(--namoid-emerald); }
+    a { color: var(--namoid-emerald); }
+    a:hover { color: var(--namoid-deep); }
     code { font-family: 'JetBrains Mono', ui-monospace, monospace !important; }
-    nav { border-bottom: 1px solid rgba(207, 227, 218, 0.12); }
-    nav .logo div { color: var(--namoid-mint); font-weight: 700; letter-spacing: -0.01em; }
+    nav { border-bottom: 1px solid rgba(14, 91, 71, 0.12); }
+    nav .logo div { color: var(--namoid-emerald); font-weight: 700; letter-spacing: -0.01em; }
 
 assignees:                              # default owners for any site without its own `assignees`; assignees get emailed on every incident
   - harshita3199
