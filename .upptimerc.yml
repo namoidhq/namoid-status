@@ -5,7 +5,7 @@ sites:
   - name: Marketing
     url: https://namoid.in
     maxResponseTime: 3000
-    assignees: [harshita3199]          # marketing-site owner
+    assignees: [harshita3199, ShivSankalp]   # marketing-site owners
 
   - name: API Liveness
     url: https://api.namoid.in/healthz
@@ -132,8 +132,9 @@ status-website:
     nav { border-bottom: 1px solid rgba(207, 227, 218, 0.12); }
     nav .logo div { color: var(--namoid-mint); font-weight: 700; letter-spacing: -0.01em; }
 
-assignees:
-  - harshita3199     # default owner for any site without its own `assignees`; assignees get emailed on every incident
+assignees:                              # default owners for any site without its own `assignees`; assignees get emailed on every incident
+  - harshita3199
+  - ShivSankalp
 
 # Keep a real incident audit trail — don't auto-delete short-lived downtime issues
 skipDeleteIssues: true
