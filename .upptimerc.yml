@@ -2,24 +2,23 @@ owner: namoidhq
 repo: namoid-status
 
 sites:
+  # Every site inherits the top-level `assignees` (harshita3199 + ShivSankalp),
+  # so both owners are notified on every incident.
   - name: Marketing
     url: https://namoid.in
     maxResponseTime: 3000
-    assignees: [harshita3199, ShivSankalp]   # marketing-site owners
 
   - name: API Liveness
     url: https://api.namoid.in/healthz
     maxResponseTime: 1500
     expectedStatusCodes:
       - 200
-    assignees: [ShivSankalp]           # IdP/API owner — adjust if a teammate owns this
 
   - name: API Readiness
     url: https://api.namoid.in/readyz
     maxResponseTime: 2000
     expectedStatusCodes:
       - 200          # /readyz returns 503 when Postgres or Redis is down — let that page us
-    assignees: [ShivSankalp]
 
   - name: OIDC Discovery
     url: https://api.namoid.in/.well-known/openid-configuration
@@ -27,7 +26,6 @@ sites:
     expectedStatusCodes:
       - 200
     __dangerous__body_down_if_text_missing: '"issuer"'   # not just 200 — verify it's a real discovery doc
-    assignees: [ShivSankalp]
 
   - name: JWKS
     url: https://api.namoid.in/jwks.json
@@ -35,7 +33,6 @@ sites:
     expectedStatusCodes:
       - 200
     __dangerous__body_down_if_text_missing: '"keys"'
-    assignees: [ShivSankalp]
 
   # --- Multi-region latency (Globalping: probes from real-world locations; free tier, no secret) ---
   # These complement the direct US-runner checks above — true latency from where users actually are.
