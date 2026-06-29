@@ -2,26 +2,38 @@ owner: namoidhq
 repo: namoid-status
 
 sites:
-  # Every site inherits the top-level `assignees` (harshita3199 + ShivSankalp),
-  # so both owners are notified on every incident.
+  # Every endpoint is checked from 🇮🇳 India (Globalping) — NamoID's users are in India,
+  # so we measure latency from where they actually are (not GitHub's US runners).
+  # Both owners (harshita3199 + ShivSankalp) are paged on every incident via top-level `assignees`.
+  # NOTE: add a GLOBALPING_TOKEN repo secret for reliable rate limits across 5 checks every 5 min.
   - name: Marketing
     url: https://namoid.in
+    type: globalping
+    location: India
     maxResponseTime: 3000
+    expectedStatusCodes:
+      - 200
 
   - name: API Liveness
     url: https://api.namoid.in/healthz
+    type: globalping
+    location: India
     maxResponseTime: 1500
     expectedStatusCodes:
       - 200
 
   - name: API Readiness
     url: https://api.namoid.in/readyz
+    type: globalping
+    location: India
     maxResponseTime: 2000
     expectedStatusCodes:
       - 200          # /readyz returns 503 when Postgres or Redis is down — let that page us
 
   - name: OIDC Discovery
     url: https://api.namoid.in/.well-known/openid-configuration
+    type: globalping
+    location: India
     maxResponseTime: 1500
     expectedStatusCodes:
       - 200
@@ -29,28 +41,12 @@ sites:
 
   - name: JWKS
     url: https://api.namoid.in/jwks.json
+    type: globalping
+    location: India
     maxResponseTime: 1500
     expectedStatusCodes:
       - 200
     __dangerous__body_down_if_text_missing: '"keys"'
-
-  # --- Multi-region latency (Globalping: probes from real-world locations; free tier, no secret) ---
-  # These complement the direct US-runner checks above — true latency from where users actually are.
-  - name: API Liveness (India)
-    url: https://api.namoid.in/healthz
-    type: globalping
-    location: India
-    maxResponseTime: 2000
-    expectedStatusCodes:
-      - 200
-
-  - name: API Liveness (Europe)
-    url: https://api.namoid.in/healthz
-    type: globalping
-    location: Europe
-    maxResponseTime: 2500
-    expectedStatusCodes:
-      - 200
 
   # --- Hidden from the status page pre-GA (commented out on request) ---
   # To monitor again: uncomment a block; flip 401 -> 200 when Basic Auth is removed at GA.
@@ -147,4 +143,4 @@ commitMessages:
   statusChange: "$PREFIX $SITE_NAME is $STATUS ($RESPONSE_CODE in $RESPONSE_TIME ms) [skip ci] [upptime]"
 
 i18n:
-  footer: "© 2026 NamoID. All rights reserved."
+  footer: "© 2026 PolyMindsLabs Pvt. Ltd. All rights reserved."
