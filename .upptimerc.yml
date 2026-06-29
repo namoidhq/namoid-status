@@ -5,18 +5,21 @@ sites:
   - name: Marketing
     url: https://namoid.in
     maxResponseTime: 3000
+    assignees: [harshita3199]          # marketing-site owner
 
   - name: API Liveness
     url: https://api.namoid.in/healthz
     maxResponseTime: 1500
     expectedStatusCodes:
       - 200
+    assignees: [ShivSankalp]           # IdP/API owner — adjust if a teammate owns this
 
   - name: API Readiness
     url: https://api.namoid.in/readyz
     maxResponseTime: 2000
     expectedStatusCodes:
       - 200          # /readyz returns 503 when Postgres or Redis is down — let that page us
+    assignees: [ShivSankalp]
 
   - name: OIDC Discovery
     url: https://api.namoid.in/.well-known/openid-configuration
@@ -24,6 +27,7 @@ sites:
     expectedStatusCodes:
       - 200
     __dangerous__body_down_if_text_missing: '"issuer"'   # not just 200 — verify it's a real discovery doc
+    assignees: [ShivSankalp]
 
   - name: JWKS
     url: https://api.namoid.in/jwks.json
@@ -31,6 +35,25 @@ sites:
     expectedStatusCodes:
       - 200
     __dangerous__body_down_if_text_missing: '"keys"'
+    assignees: [ShivSankalp]
+
+  # --- Multi-region latency (Globalping: probes from real-world locations; free tier, no secret) ---
+  # These complement the direct US-runner checks above — true latency from where users actually are.
+  - name: API Liveness (India)
+    url: https://api.namoid.in/healthz
+    type: globalping
+    location: India
+    maxResponseTime: 2000
+    expectedStatusCodes:
+      - 200
+
+  - name: API Liveness (Europe)
+    url: https://api.namoid.in/healthz
+    type: globalping
+    location: Europe
+    maxResponseTime: 2500
+    expectedStatusCodes:
+      - 200
 
   # --- Hidden from the status page pre-GA (commented out on request) ---
   # To monitor again: uncomment a block; flip 401 -> 200 when Basic Auth is removed at GA.
@@ -52,8 +75,29 @@ status-website:
   introTitle: "NamoID Status"
   introMessage: "Live uptime, response times, and incident history for NamoID — the marketing site, API, and OIDC identity provider."
   logoUrl: https://namoid.in/brand/namoid-mark.svg       # emerald tile + white N — reads well on dark
-  favicon: https://namoid.in/brand/namoid-favicon.svg    # NamoID favicon (replaces the default Upptime icon)
+  favicon: https://namoid.in/icon-192.png                # PNG favicon (Upptime's `favicon` expects PNG)
+  faviconSvg: https://namoid.in/brand/namoid-favicon.svg # crisp SVG favicon for modern browsers
   theme: dark
+  # Open Graph / Twitter card so the status link previews on-brand when shared in Slack/X
+  metaTags:
+    - property: "og:title"
+      content: "NamoID Status"
+    - property: "og:description"
+      content: "Live uptime, response times, and incident history for NamoID."
+    - property: "og:image"
+      content: "https://namoid.in/brand/namoid-og.png"
+    - property: "og:url"
+      content: "https://status.namoid.in"
+    - property: "og:type"
+      content: "website"
+    - name: "twitter:card"
+      content: "summary_large_image"
+    - name: "twitter:title"
+      content: "NamoID Status"
+    - name: "twitter:description"
+      content: "Live uptime, response times, and incident history for NamoID."
+    - name: "twitter:image"
+      content: "https://namoid.in/brand/namoid-og.png"
   navbar:
     - title: Home
       href: /
@@ -89,7 +133,10 @@ status-website:
     nav .logo div { color: var(--namoid-mint); font-weight: 700; letter-spacing: -0.01em; }
 
 assignees:
-  - harshita3199     # real GitHub username (not the org); assignees get emailed on every incident
+  - harshita3199     # default owner for any site without its own `assignees`; assignees get emailed on every incident
+
+# Keep a real incident audit trail — don't auto-delete short-lived downtime issues
+skipDeleteIssues: true
 
 # Built-in notifications. Email is delivered via GitHub Issue assignment above.
 # Add a Slack/Telegram channel here for push alerts (see Task 5).
