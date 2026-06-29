@@ -37,12 +37,9 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           token: ${{ secrets.GH_PAT || github.token }}
-      - name: Update template
-        uses: upptime/uptime-monitor@5d69af5f0d5b6172fee77bb0daa7a3fc3b62139b # v1.43.5
-        with:
-          command: "update-template"
-        env:
-          GH_PAT: ${{ secrets.GH_PAT || github.token }}
+      # NOTE: the "update-template" step was intentionally removed — this repo is
+      # decoupled from the upstream Upptime template so config pushes can't
+      # regenerate/overwrite the SHA-pinned, least-privilege workflow files.
       - name: Update response time
         uses: upptime/uptime-monitor@5d69af5f0d5b6172fee77bb0daa7a3fc3b62139b # v1.43.5
         with:

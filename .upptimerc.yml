@@ -50,14 +50,43 @@ status-website:
   cname: status.namoid.in
   name: NamoID Status
   introTitle: "NamoID Status"
-  introMessage: "Live uptime and incident status for NamoID — Marketing site, API, and the OIDC identity provider."
-  logoUrl: https://namoid.in/brand/namoid-mark.svg   # official NamoID brand mark (SVG)
-  theme: light
+  introMessage: "Live uptime, response times, and incident history for NamoID — the marketing site, API, and OIDC identity provider."
+  logoUrl: https://namoid.in/brand/namoid-mark.svg       # emerald tile + white N — reads well on dark
+  favicon: https://namoid.in/brand/namoid-favicon.svg    # NamoID favicon (replaces the default Upptime icon)
+  theme: dark
   navbar:
     - title: Home
       href: /
     - title: Website
       href: https://namoid.in
+    - title: Docs
+      href: https://docs.namoid.in
+    - title: Report an issue
+      href: https://github.com/namoidhq/namoid-status/issues
+  # NamoID brand polish — palette: emerald #0e5b47 · deep #0a4a39 · mint #cfe3da · ink #0a0a0a
+  # Fonts: Plus Jakarta Sans (body) + JetBrains Mono (code), per the brand guide.
+  css: |
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    :root {
+      --namoid-emerald: #0e5b47;
+      --namoid-deep: #0a4a39;
+      --namoid-mint: #cfe3da;
+      --namoid-ink: #0a0a0a;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+      background: var(--namoid-ink) !important;
+    }
+    h1, h2, h3, .lead {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+    h1, h2, h3 { letter-spacing: -0.02em; }
+    header h1 { color: var(--namoid-mint); }
+    a { color: var(--namoid-mint); }
+    a:hover { color: #ffffff; }
+    code { font-family: 'JetBrains Mono', ui-monospace, monospace !important; }
+    nav { border-bottom: 1px solid rgba(207, 227, 218, 0.12); }
+    nav .logo div { color: var(--namoid-mint); font-weight: 700; letter-spacing: -0.01em; }
 
 assignees:
   - harshita3199     # real GitHub username (not the org); assignees get emailed on every incident
