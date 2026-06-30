@@ -17,16 +17,29 @@ const formatter = new Intl.DateTimeFormat(undefined, {
   timeStyle: "short",
 });
 
-async function fetchJson(path) {
-  const local = await fetch(`./${path}?v=${Date.now()}`);
+// Live data source: the data branch (main) updates every ~5–30 min. Fetch from there at
+// runtime so the page is always current — not the once-a-day build-time snapshot.
+// Falls back to the bundled copy if the live fetch fails (offline / CORS / rate limit).
+const DATA_BASE = "https://raw.githubusercontent.com/namoidhq/namoid-status/HEAD";
+
+async function fetchLive(path) {
+  try {
+    const live = await fetch(`${DATA_BASE}/${path}?v=${Date.now()}`, { cache: "no-store" });
+    if (live.ok) return live;
+  } catch (_) {
+    /* network / CORS / rate-limit hiccup — fall through to the bundled snapshot */
+  }
+  const local = await fetch(`./${path}?v=${Date.now()}`, { cache: "no-store" });
   if (!local.ok) throw new Error(`Unable to load ${path}`);
-  return local.json();
+  return local;
+}
+
+async function fetchJson(path) {
+  return (await fetchLive(path)).json();
 }
 
 async function fetchText(path) {
-  const local = await fetch(`./${path}?v=${Date.now()}`);
-  if (!local.ok) throw new Error(`Unable to load ${path}`);
-  return local.text();
+  return (await fetchLive(path)).text();
 }
 
 function readYamlValue(text, key) {
@@ -170,3 +183,15 @@ async function boot() {
 }
 
 boot();
+
+// Keep an open tab current: silently re-fetch live data every 60s. On a transient
+// failure we keep the last good render instead of flashing the error state.
+setInterval(() => {
+  fetchJson(SUMMARY_PATH)
+    .then((services) => {
+      renderMetrics(services);
+      renderServices(services);
+      return renderTimeline(services);
+    })
+    .catch(() => {});
+}, 60000);
