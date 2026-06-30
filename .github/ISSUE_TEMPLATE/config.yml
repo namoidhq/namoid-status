@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Feature requests and ideas
-    url: https://github.com/orgs/upptime/discussions/new?category=ideas
-    about: Suggest an idea for this project
-  - name: Questions
-    url: https://github.com/orgs/upptime/discussions/new?category=q-a
-    about: Please ask and answer questions here
+  - name: 📖 Documentation
+    url: https://docs.namoid.in
+    about: Read the NamoID integration and API docs before filing.
+  - name: ✉️ Contact / security reports
+    url: mailto:hello@namoid.in
+    about: Security issues or anything you'd rather not file publicly — email us here.

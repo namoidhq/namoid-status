@@ -70,5 +70,5 @@ Alerting is GitHub-native (issue assignees are emailed) — no Slack webhook or 
 ## 📄 License
 
 - Powered by: [Upptime](https://github.com/upptime/upptime)
-- Code: [MIT](./LICENSE) © [Anand Chowdhary](https://anandchowdhary.com)
+- Code: [MIT](./LICENSE) © PolyMindsLabs Pvt. Ltd.
 - Data in the `./history` directory: [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)
