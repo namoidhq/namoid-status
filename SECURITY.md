@@ -26,12 +26,12 @@ anonymous reports are welcome too.
 
 ## Scope
 
-This repo ships client-side code (examples and/or SDKs). The most relevant
+This repo is an Upptime-powered status page and configuration repo. The most relevant
 findings here are things like:
 
-- Token or secret handling bugs in the SDK or example flows.
-- Insecure defaults that could lead an integrator to leak credentials.
-- Dependency vulnerabilities that affect how this code is actually used.
+- Secret handling issues in GitHub Actions/workflows (token leakage, unsafe logging).
+- Misconfigurations that could expose internal endpoints or sensitive metadata.
+- Dependency vulnerabilities that affect the generated status site or checks.
 
 Findings against the NamoID hosted service itself (`*.id.namoid.in`,
 `api.namoid.in`) are also welcome — email the same address with the details
