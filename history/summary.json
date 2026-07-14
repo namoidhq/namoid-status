@@ -40,18 +40,20 @@
     "url": "https://api.namoid.in/readyz",
     "icon": "https://icons.duckduckgo.com/ip3/api.namoid.in.ico",
     "slug": "api-readiness",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 353,
-    "timeDay": 211,
-    "timeWeek": 82,
-    "timeMonth": 353,
-    "timeYear": 353,
-    "dailyMinutesDown": {}
+    "time": 344,
+    "timeDay": 112,
+    "timeWeek": 74,
+    "timeMonth": 344,
+    "timeYear": 344,
+    "dailyMinutesDown": {
+      "2026-07-14": 0
+    }
   },
   {
     "name": "OIDC Discovery",
