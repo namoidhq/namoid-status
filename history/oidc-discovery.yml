@@ -1,7 +1,7 @@
 url: https://api.namoid.in/.well-known/openid-configuration
-status: down
-code: 502
-responseTime: 44
-lastUpdated: 2026-07-29T23:38:48.018Z
+status: up
+code: 200
+responseTime: 26
+lastUpdated: 2026-07-29T23:56:22.793Z
 startTime: 2026-06-26T22:57:29.388Z
 generator: Upptime <https://github.com/upptime/upptime>
