@@ -5,7 +5,7 @@ sites:
   # Every endpoint is checked from 🇮🇳 India (Globalping) — NamoID's users are in India,
   # so we measure latency from where they actually are (not GitHub's US runners).
   # Both owners (harshita3199 + ShivSankalp) are paged on every incident via top-level `assignees`.
-  # NOTE: add a GLOBALPING_TOKEN repo secret for reliable rate limits across 5 checks every 5 min.
+  # NOTE: add a GLOBALPING_TOKEN repo secret for reliable rate limits across 4 checks every 5 min.
   - name: Marketing
     url: https://namoid.in
     type: globalping
@@ -22,13 +22,15 @@ sites:
     expectedStatusCodes:
       - 200
 
-  - name: API Readiness
-    url: https://api.namoid.in/readyz
-    type: globalping
-    location: India
-    maxResponseTime: 2000
-    expectedStatusCodes:
-      - 200          # /readyz returns 503 when Postgres or Redis is down — let that page us
+  # --- Disabled: /readyz is not implemented on the API (404 since 2026-06-26) ---
+  # To monitor again: uncomment once /readyz ships.
+  # - name: API Readiness
+  #   url: https://api.namoid.in/readyz
+  #   type: globalping
+  #   location: India
+  #   maxResponseTime: 2000
+  #   expectedStatusCodes:
+  #     - 200        # /readyz returns 503 when Postgres or Redis is down — let that page us
 
   - name: OIDC Discovery
     url: https://api.namoid.in/.well-known/openid-configuration

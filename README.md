@@ -38,9 +38,10 @@ The real public surfaces:
 | --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | Marketing       | `https://namoid.in`                                      | `200`                                                                           |
 | API — liveness  | `https://api.namoid.in/healthz`                          | `200`                                                                           |
-| API — readiness | `https://api.namoid.in/readyz`                           | `200` (returns `503` when Postgres/Redis is degraded — we _want_ that to alert) |
 | OIDC discovery  | `https://api.namoid.in/.well-known/openid-configuration` | `200` + `"issuer"` in body                                                      |
 | JWKS            | `https://api.namoid.in/jwks.json`                        | `200` + `"keys"` in body                                                        |
+
+> **API — readiness** (`api.namoid.in/readyz`) is commented out in `.upptimerc.yml`: the route is not implemented on the API and has returned `404`  Uncomment it once `/readyz` ships, expecting `200` (it should return `503` when Postgres/Redis is degraded — we _want_ that to alert).
 
 > **Dashboard** (`app.namoid.in`) and **Docs** (`docs.namoid.in`) are commented out in `.upptimerc.yml` while they sit behind the pre-GA HTTP Basic Auth gate. At GA, uncomment them and flip `expectedStatusCodes` from `401` to `200`.
 
